@@ -3,7 +3,6 @@ import dotenv from 'dotenv'; // environment variables
 
 dotenv.config();
 
-// connect MongoDB
 let database = null;
 const mongoClient = new MongoClient(process.env.MONGO_URL);
 

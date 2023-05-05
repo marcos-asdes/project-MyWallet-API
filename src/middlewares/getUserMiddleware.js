@@ -1,4 +1,4 @@
-import database from '../database.js';
+import database from '../../config.js';
 
 export async function getUser(req, res, next) {
     const { authorization } = req.headers;

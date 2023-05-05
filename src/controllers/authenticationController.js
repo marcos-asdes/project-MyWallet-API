@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'; // data encrypting
 import { v4 as uuid } from 'uuid';
 
-import database from '../database.js';
+import database from '../../config.js';
 
 export async function signUp(req, res) {
     try {
