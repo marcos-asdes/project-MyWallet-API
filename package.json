@@ -1,5 +1,5 @@
 {
-  "name": "projeto13-mywallet-back",
+  "name": "project-mywallet-api",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -7,25 +7,26 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check-updates": "npx npm-check-updates -u"
   },
   "keywords": [],
   "author": "Marcos Antonio",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "chalk": "^5.0.1",
+    "bcrypt": "^5.1.0",
+    "chalk": "^5.2.0",
     "cors": "^2.8.5",
-    "dayjs": "^1.11.2",
-    "dotenv": "^16.0.0",
-    "express": "^4.18.1",
-    "joi": "^17.6.0",
-    "mongodb": "^4.5.0",
-    "uuid": "^8.3.2"
+    "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "mongodb": "^5.4.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16",
-    "string-strip-html": "^9.1.12",
-    "url-exist": "^3.0.0"
+    "nodemon": "^2.0.22",
+    "string-strip-html": "^13.2.3",
+    "url-exist": "^3.0.1"
   }
 }
