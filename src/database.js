@@ -17,12 +17,4 @@ try {
     console.log("Error connecting to database", error);
 }
 
-// Alternative method
-/* const promise = mongoClient.connect();
-promise.then(() => {
-    database = mongoClient.db(process.env.DATABASE);
-    console.log("MongoDB database connected");
-});
-promise.catch((error) => console.log("Error connecting to database", error)); */
-
 export default database;

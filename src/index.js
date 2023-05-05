@@ -2,7 +2,7 @@ import express, { json } from 'express'; // server
 import cors from 'cors';
 import dotenv from 'dotenv'; // environment variables
 
-import router from './routes/router.js'
+import router from './src/routes/router.js'
 
 const app = express(); // create a server
 
