@@ -1,8 +1,15 @@
 import express from 'express';
 
-import { validateSignIn, validadeSignUp} from '../middlewares/validateAuthenticationMiddleware.js';
+import {
+  validateSignIn,
+  validadeSignUp
+} from '../middlewares/validateAuthenticationMiddleware.js';
 
-import { signIn, signUp, signOut } from '../controllers/authenticationController.js';
+import {
+  signIn,
+  signUp,
+  signOut
+} from '../controllers/authenticationController.js';
 
 const authenticationRouter = express.Router();
 

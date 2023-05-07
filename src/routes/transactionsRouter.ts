@@ -2,7 +2,10 @@ import express from 'express';
 
 import { getUser } from '../middlewares/getUserMiddleware.js';
 
-import { getTransactions, addTransactions } from '../controllers/transactionsController.js';
+import {
+  getTransactions,
+  addTransactions
+} from '../controllers/transactionsController.js';
 
 const transactionsRouter = express.Router();
 

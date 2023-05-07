@@ -2,7 +2,7 @@ import express, { json } from 'express'; // server
 import cors from 'cors';
 import dotenv from 'dotenv'; // environment variables
 
-import router from './routes/router.js'
+import router from './routes/router.js';
 
 const app = express(); // create a server
 
@@ -15,5 +15,5 @@ app.use(router);
 const port = process.env.PORT || 5000; // establishing the port -> production or development
 
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-})
+  console.log(`Server is running on port: ${port}`);
+});
