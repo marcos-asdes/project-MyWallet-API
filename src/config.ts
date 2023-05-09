@@ -1,23 +1,24 @@
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import { errorLog } from './events/errorHandler.js';
+import logHandler from './events/logHandler.js';
 
-dotenv.config();
+dotenv.config({ path: '.env' });
 
-let database = null;
+let db = null;
 let mongoClient: MongoClient;
 
 if (process.env.MONGO_URL && process.env.DATABASE) {
   mongoClient = new MongoClient(process.env.MONGO_URL);
   try {
     await mongoClient.connect();
-    database = mongoClient.db(process.env.DATABASE);
-    console.log('MongoDB database connected');
+    db = mongoClient.db(process.env.DATABASE);
+    logHandler('Server', 'MongoDB database connected');
   } catch (error) {
-    console.log('Error connecting to database', error);
+    logHandler('Error', String(error));
   }
 } else {
   throw new errorLog(500, 'Environment variables not specified');
 }
 
-export default database;
+export default db;

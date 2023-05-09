@@ -1,18 +1,27 @@
-import express, { json } from 'express'; // server
+import express, { json } from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv'; // environment variables
+import dotenv from 'dotenv';
+import helmet from 'helmet';
+import 'express-async-errors';
 
-import router from './routes/router.js';
+import router from './routes/index.js';
+import { apiLimiter } from './middlewares/rateLimiterMiddleware.js';
+import errorHandler from './events/errorHandler.js';
 
-const app = express(); // create a server
+dotenv.config({ path: '.env' });
 
-dotenv.config();
+const app = express();
 
-app.use(json()); // middleware
-app.use(cors()); // middleware
+app.use(json());
+app.use(cors());
+app.use(helmet());
 app.use(router);
+app.use(errorHandler);
+app.use(apiLimiter);
 
-const port = process.env.PORT || 5000; // establishing the port -> production or development
+export default app;
+
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
