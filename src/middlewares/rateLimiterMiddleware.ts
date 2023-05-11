@@ -12,6 +12,6 @@ export const apiLimiter: RateLimitRequestHandler = rateLimit({
   },
   handler: (_req: Request, res: Response): void => {
     logHandler('Middleware', 'Too many requests');
-    res.sendStatus(429).send('Too many requests');
+    res.status(429).send('Too many requests');
   }
 });

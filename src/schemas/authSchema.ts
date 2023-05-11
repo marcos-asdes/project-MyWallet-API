@@ -1,6 +1,5 @@
-import joi from 'joi'; // data validation
+import joi from 'joi';
 
-// validation -> joi
 export const signUpSchema = joi.object({
   name: joi.string().alphanum().min(3).max(50).required(),
   email: joi.string().email().required(),

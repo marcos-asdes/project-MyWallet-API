@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+/* import { Request, Response, NextFunction } from 'express';
 import { signUpSchema, signInSchema } from '../schemas/authSchema.js';
 
 export function validateSignIn(
@@ -24,3 +24,4 @@ export function validadeSignUp(
   }
   next();
 }
+ */

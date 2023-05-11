@@ -1,6 +1,5 @@
-import joi from 'joi'; // data validation
+import joi from 'joi';
 
-// validation -> joi
 const transactionsSchema = joi.object({
   type: joi.string().required(),
   description: joi.string().required(),

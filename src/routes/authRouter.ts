@@ -6,15 +6,15 @@ import {
   signOutController
 } from '../controllers/authController.js';
 
-import {
+/* import {
   validateSignIn,
   validadeSignUp
-} from '../middlewares/validateAuthMiddleware.js';
+} from '../middlewares/validateAuthMiddleware.js'; */
 
 const authRouter = express.Router();
 
-authRouter.post('/signin', validateSignIn, signInController);
-authRouter.post('/signup', validadeSignUp, signUpController);
+authRouter.post('/signin', /* validateSignIn, */ signInController);
+authRouter.post('/signup', /* validadeSignUp, */ signUpController);
 authRouter.get('/signout', signOutController);
 
 export default authRouter;

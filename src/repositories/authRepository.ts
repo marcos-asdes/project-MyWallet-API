@@ -40,6 +40,15 @@ async function registerUserSessionInDatabase(
   logHandler('Repository', 'Repository accessed successfully');
 }
 
+async function findUserSessionInDatabase(
+  token: string
+): Promise<WithId<Document> | null> {
+  if (!db) throw new ErrorLog(500, 'Database connection not established');
+  const session = await db.collection('sessions').findOne({ token });
+  logHandler('Repository', 'Repository accessed successfully');
+  return session;
+}
+
 async function deleteUserSessionInDatabase(token: string): Promise<void> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
   await db.collection('sessions').deleteOne({ token });
@@ -50,5 +59,6 @@ export {
   registerUserInDatabase,
   findUserInDatabase,
   registerUserSessionInDatabase,
+  findUserSessionInDatabase,
   deleteUserSessionInDatabase
 };

@@ -1,6 +1,4 @@
 import { Request, Response } from 'express';
-import dayjs from 'dayjs';
-import transactionsSchema from '../schemas/transactionsSchema.js';
 
 async function getTransactionsController(
   _req: Request,
