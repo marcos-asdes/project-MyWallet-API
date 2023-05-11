@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { signUpSchema, signInSchema } from '../schemas/authenticationSchema.js';
+import { signUpSchema, signInSchema } from '../schemas/authSchema.js';
 
 export function validateSignIn(
   req: Request,

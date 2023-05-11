@@ -1,11 +1,11 @@
-import { MongoClient } from 'mongodb';
+import { Db, MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import { errorLog } from './events/errorHandler.js';
 import logHandler from './events/logHandler.js';
 
 dotenv.config({ path: '.env' });
 
-let db = null;
+let db: Db | null = null;
 let mongoClient: MongoClient;
 
 if (process.env.MONGO_URL && process.env.DATABASE) {
