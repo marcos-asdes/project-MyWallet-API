@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API ...",
+    "description": "...",
+    "contact": {
+      "email": "marco.engc@poli.ufrj.br"
+    },
+    "version": "1.0.0",
+    "license": "MIT"
+  }
+}
