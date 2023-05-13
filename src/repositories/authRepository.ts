@@ -28,6 +28,15 @@ async function findUserInDatabase(
   return user;
 }
 
+async function findUserIdInDatabase(
+  userId: string
+): Promise<WithId<Document> | null> {
+  if (!db) throw new ErrorLog(500, 'Database connection not established');
+  const session = await db.collection('users').findOne({ userId });
+  logHandler('Repository', 'Repository accessed successfully');
+  return session;
+}
+
 async function registerUserSessionInDatabase(
   userId: string,
   token: string
@@ -41,10 +50,10 @@ async function registerUserSessionInDatabase(
 }
 
 async function findUserSessionInDatabase(
-  token: string
+  userId: string
 ): Promise<WithId<Document> | null> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
-  const session = await db.collection('sessions').findOne({ token });
+  const session = await db.collection('sessions').findOne({ userId });
   logHandler('Repository', 'Repository accessed successfully');
   return session;
 }
@@ -55,9 +64,10 @@ async function deleteUserSessionInDatabase(token: string): Promise<void> {
   logHandler('Repository', 'Repository accessed successfully');
 }
 
-export {
+export const authRepository = {
   registerUserInDatabase,
   findUserInDatabase,
+  findUserIdInDatabase,
   registerUserSessionInDatabase,
   findUserSessionInDatabase,
   deleteUserSessionInDatabase
