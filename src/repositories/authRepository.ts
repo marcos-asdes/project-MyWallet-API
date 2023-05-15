@@ -17,7 +17,7 @@ async function registerUserInDatabase(
   logHandler('Repository', 'Repository accessed successfully');
 }
 
-async function findUserInDatabase(
+async function findEmailInDatabase(
   email: string
 ): Promise<WithId<Document> | null> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
@@ -66,7 +66,7 @@ async function deleteUserSessionInDatabase(token: string): Promise<void> {
 
 export const authRepository = {
   registerUserInDatabase,
-  findUserInDatabase,
+  findEmailInDatabase,
   findUserIdInDatabase,
   registerUserSessionInDatabase,
   findUserSessionInDatabase,

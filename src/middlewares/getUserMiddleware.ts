@@ -1,5 +1,5 @@
 /* import { Request, Response, NextFunction } from 'express';
-import database from '../config.js';
+/* import database from '../config.js';
 
 export async function getUser(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.headers;

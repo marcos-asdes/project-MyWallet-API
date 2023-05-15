@@ -1,7 +1,7 @@
 import express from 'express';
-
-/* import { getUser } from '../middlewares/getUserMiddleware.js'; */
-
+import tokenValidationMiddleware from '../middlewares/tokenValidationMiddleware.js';
+import schemaValidationMiddleware from '../middlewares/schemaValidationMiddleware.js';
+import * as schema from '../schemas/transactionsSchema.js';
 import {
   getTransactionsController,
   addTransactionsController
@@ -9,9 +9,13 @@ import {
 
 const transactionsRouter = express.Router();
 
-/* transactionsRouter.use(getUser); */
+transactionsRouter.use(tokenValidationMiddleware);
 
+transactionsRouter.post(
+  '/transactions',
+  schemaValidationMiddleware(schema.transactionsSchema),
+  addTransactionsController
+);
 transactionsRouter.get('/transactions', getTransactionsController);
-transactionsRouter.post('/transactions', addTransactionsController);
 
 export default transactionsRouter;
