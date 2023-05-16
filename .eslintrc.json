@@ -6,7 +6,8 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
   "overrides": [
     {
@@ -37,7 +38,12 @@
   "rules": {
     "indent": [
       "error",
-      2
+      2,
+      {
+        "FunctionDeclaration": {
+          "parameters": "first"
+        }
+      }
     ],
     "linebreak-style": [
       "error",
