@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+
 export type LogTypes =
   | 'Route'
   | 'Middleware'
@@ -7,3 +9,8 @@ export type LogTypes =
   | 'Service'
   | 'Util'
   | 'Error';
+
+export type SignInType = {
+  userId: ObjectId;
+  encryptedPassword: string;
+};
