@@ -17,9 +17,7 @@ async function registerUserInDatabase(
   logHandler('Repository', 'Repository accessed successfully');
 }
 
-async function findEmailInDatabase(
-  email: string
-): Promise<WithId<Document> | null> {
+async function findEmailInDatabase(email: string): Promise<WithId<Document> | null> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
   const user: WithId<Document> | null = await db.collection('users').findOne({
     email: email
@@ -28,19 +26,14 @@ async function findEmailInDatabase(
   return user;
 }
 
-async function findUserIdInDatabase(
-  userId: string
-): Promise<WithId<Document> | null> {
+async function findUserIdInDatabase(userId: string): Promise<WithId<Document> | null> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
   const session = await db.collection('users').findOne({ userId });
   logHandler('Repository', 'Repository accessed successfully');
   return session;
 }
 
-async function registerUserSessionInDatabase(
-  userId: string,
-  token: string
-): Promise<void> {
+async function registerUserSessionInDatabase(userId: string, token: string): Promise<void> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
   await db.collection('sessions').insertOne({
     token: token,
@@ -49,9 +42,7 @@ async function registerUserSessionInDatabase(
   logHandler('Repository', 'Repository accessed successfully');
 }
 
-async function findUserSessionInDatabase(
-  userId: string
-): Promise<WithId<Document> | null> {
+async function findUserSessionInDatabase(userId: string): Promise<WithId<Document> | null> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
   const session = await db.collection('sessions').findOne({ userId });
   logHandler('Repository', 'Repository accessed successfully');

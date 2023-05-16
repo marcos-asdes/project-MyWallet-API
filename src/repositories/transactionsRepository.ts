@@ -4,14 +4,9 @@ import { ErrorLog } from '../events/errorHandler.js';
 import logHandler from '../events/logHandler.js';
 import dayjs from 'dayjs';
 
-async function getTransactionsFromDatabase(
-  userId: string
-): Promise<WithId<Document>[]> {
+async function getTransactionsFromDatabase(userId: string): Promise<WithId<Document>[]> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
-  const transactions = await db
-    .collection('transactions')
-    .find({ userId: userId })
-    .toArray();
+  const transactions = await db.collection('transactions').find({ userId: userId }).toArray();
   logHandler('Repository', 'Repository accessed successfully');
   return transactions;
 }

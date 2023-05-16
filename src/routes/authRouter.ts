@@ -9,16 +9,8 @@ import {
 
 const authRouter = express.Router();
 
-authRouter.post(
-  '/sign-up',
-  schemaValidationMiddleware(schema.signUpSchema),
-  signUpController
-);
-authRouter.post(
-  '/sign-in',
-  schemaValidationMiddleware(schema.signInSchema),
-  signInController
-);
+authRouter.post('/sign-up', schemaValidationMiddleware(schema.signUpSchema), signUpController);
+authRouter.post('/sign-in', schemaValidationMiddleware(schema.signInSchema), signInController);
 authRouter.get('/sign-out', signOutController);
 
 export default authRouter;
