@@ -19,6 +19,6 @@ authRouter.post(
   schemaValidationMiddleware(schema.signInSchema),
   signInController
 );
-authRouter.get('/signout', signOutController);
+authRouter.get('/sign-out', signOutController);
 
 export default authRouter;

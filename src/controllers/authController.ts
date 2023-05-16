@@ -1,14 +1,19 @@
 import { Request, Response } from 'express';
+import logHandler from '../events/logHandler.js';
+import { authRepository } from '../repositories/authRepository.js';
+import * as service from '../services/authService.js';
 
 async function signUpController(
-  req: Request,
+  _req: Request,
   res: Response
 ): Promise<Response> {
-  // verifica se o usuário já existe
-  // criptografa a senha
-  // armazena o usuario no banco de dados
-  // alterar response!
-  return res.sendStatus(201);
+  const { name, email, password } = res.locals.body;
+  await service.checkIfUserIsAlreadyRegistered(email);
+  const encryptedPassword = await service.encryptPassword(password);
+  await authRepository.registerUserInDatabase(name, email, encryptedPassword);
+  const data = `User ${email} has been registered successfully.`;
+  logHandler('Controller', 'User signed up');
+  return res.status(201).send(data);
 }
 
 async function signInController(
