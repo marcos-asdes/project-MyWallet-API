@@ -8,17 +8,15 @@ dotenv.config({ path: '.env' });
 let db: Db | null = null;
 let mongoClient: MongoClient;
 
-if (process.env.MONGO_URL && process.env.DATABASE) {
-  mongoClient = new MongoClient(process.env.MONGO_URL);
-  try {
-    await mongoClient.connect();
-    db = mongoClient.db(process.env.DATABASE);
-    logHandler('Server', 'MongoDB database connected');
-  } catch (error) {
-    logHandler('Error', String(error));
-  }
-} else {
+if (!process.env.MONGO_URL || !process.env.DATABASE)
   throw new ErrorLog(500, 'Environment variables not specified');
+try {
+  mongoClient = new MongoClient(process.env.MONGO_URL);
+  await mongoClient.connect();
+  db = mongoClient.db(process.env.DATABASE);
+  logHandler('Server', 'MongoDB database connected');
+} catch (error) {
+  logHandler('Error', String(error));
 }
 
 export default db;

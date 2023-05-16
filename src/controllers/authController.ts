@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Document, ObjectId, WithId } from 'mongodb';
 import logHandler from '../events/logHandler.js';
 import { authRepository } from '../repositories/authRepository.js';
 import * as service from '../services/authService.js';

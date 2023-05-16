@@ -2,7 +2,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import authRouter from './authRouter.js';
 import transactionsRouter from './transactionsRouter.js';
-import swaggerDocs from '../../swagger.json';
+import swaggerDocs from '../../swagger.json' assert { type: 'json' };
 import { routeLog } from '../events/routeLog.js';
 
 const router = express.Router();

@@ -28,9 +28,9 @@ async function findEmailInDatabase(email: string): Promise<WithId<Document> | nu
 
 async function findUserIdInDatabase(userId: string): Promise<WithId<Document> | null> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
-  const session = await db.collection('users').findOne({ userId });
+  const user: WithId<Document> | null = await db.collection('users').findOne({ userId });
   logHandler('Repository', 'Repository accessed successfully');
-  return session;
+  return user;
 }
 
 export const authRepository = {
