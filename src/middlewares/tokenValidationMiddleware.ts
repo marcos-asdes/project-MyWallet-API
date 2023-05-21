@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { Document, WithId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import logHandler from '../events/logHandler.js';
 import { ErrorLog } from '../events/errorHandler.js';
 import { authRepository } from '../repositories/authRepository.js';
+import { UserId } from 'src/types/types.js';
 
 async function tokenValidationMiddleware(
   req: Request,
@@ -18,7 +19,8 @@ async function tokenValidationMiddleware(
   try {
     const { sub } = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
     if (!sub) throw new ErrorLog(401, 'Invalid token');
-    const user_data: WithId<Document> | null = await authRepository.findUserIdInDatabase(sub);
+    const subObjectId: ObjectId = new ObjectId(sub);
+    const user_data: UserId | null = await authRepository.findUserIdInDatabase(subObjectId);
     if (!user_data) throw new ErrorLog(404, 'User not found');
     res.locals.user_data = user_data;
     res.locals.subject = sub;

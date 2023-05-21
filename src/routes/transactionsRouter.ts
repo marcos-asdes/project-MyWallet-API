@@ -9,13 +9,12 @@ import {
 
 const transactionsRouter = express.Router();
 
-transactionsRouter.use(tokenValidationMiddleware);
-
 transactionsRouter.post(
   '/transactions',
+  tokenValidationMiddleware,
   schemaValidationMiddleware(schema.transactionsSchema),
   addTransactionsController
 );
-transactionsRouter.get('/transactions', getTransactionsController);
+transactionsRouter.get('/transactions', tokenValidationMiddleware, getTransactionsController);
 
 export default transactionsRouter;
