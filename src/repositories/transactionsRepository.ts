@@ -1,12 +1,16 @@
-import { Document, WithId } from 'mongodb';
+import { ObjectId } from 'mongodb';
+import dayjs from 'dayjs';
 import db from '../config.js';
 import { ErrorLog } from '../events/errorHandler.js';
 import logHandler from '../events/logHandler.js';
-import dayjs from 'dayjs';
+import { Transaction, TransactionWithoutId } from '../types/types.js';
 
-async function getTransactionsFromDatabase(userId: string): Promise<WithId<Document>[]> {
+async function getTransactionsFromDatabase(userId: ObjectId): Promise<Transaction[]> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
-  const transactions = await db.collection('transactions').find({ userId: userId }).toArray();
+  const transactions = await db
+    .collection<Transaction>('transactions')
+    .find({ userId: userId })
+    .toArray();
   logHandler('Repository', 'Repository accessed successfully');
   return transactions;
 }
@@ -15,16 +19,17 @@ async function addTransactionInDatabase(
   type: string,
   value: number,
   description: string,
-  userId: string
+  userId: ObjectId
 ): Promise<void> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
-  await db.collection('transactions').insertOne({
-    type,
-    value,
-    description,
+  await db.collection<TransactionWithoutId>('transactions').insertOne({
+    type: type,
+    value: value,
+    description: description,
     date: dayjs().format('DD/MM'),
     userId: userId
   });
   logHandler('Repository', 'Repository accessed successfully');
 }
+
 export { getTransactionsFromDatabase, addTransactionInDatabase };

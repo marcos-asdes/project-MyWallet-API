@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { Document, ObjectId, WithId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import jwt, { Algorithm, SignOptions } from 'jsonwebtoken';
 import { ErrorLog } from '../events/errorHandler.js';
 import logHandler from '../events/logHandler.js';

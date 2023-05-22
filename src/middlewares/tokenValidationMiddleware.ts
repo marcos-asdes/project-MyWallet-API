@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb';
 import logHandler from '../events/logHandler.js';
 import { ErrorLog } from '../events/errorHandler.js';
 import { authRepository } from '../repositories/authRepository.js';
-import { UserId } from 'src/types/types.js';
+import { UserId } from '../types/types.js';
 
 async function tokenValidationMiddleware(
   req: Request,

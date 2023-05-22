@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import db from '../config.js';
 import { ErrorLog } from '../events/errorHandler.js';
 import logHandler from '../events/logHandler.js';
-import { User, UserId, UserWithoutId } from 'src/types/types.js';
+import { User, UserId, UserWithoutId } from '../types/types.js';
 
 async function registerUserInDatabase(
   name: string,

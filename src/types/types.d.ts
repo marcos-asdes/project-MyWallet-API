@@ -25,3 +25,14 @@ export type SignInType = {
   userId: ObjectId;
   encryptedPassword: string;
 };
+
+export interface Transaction {
+  _id: ObjectId;
+  type: string;
+  value: number;
+  description: string;
+  date: string;
+  userId: ObjectId;
+}
+
+export type TransactionWithoutId = Omit<Transaction, '_id'>;
