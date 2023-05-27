@@ -5,7 +5,7 @@ import { ErrorLog } from '../events/errorHandler.js';
 import logHandler from '../events/logHandler.js';
 import { Transaction, TransactionWithoutId } from '../types/types.js';
 
-async function getTransactionsFromDatabase(userId: ObjectId): Promise<Transaction[]> {
+async function getAllUserTransactionsFromDatabase(userId: ObjectId): Promise<Transaction[]> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
   const transactions = await db
     .collection<Transaction>('transactions')
@@ -32,4 +32,7 @@ async function addTransactionInDatabase(
   logHandler('Repository', 'Repository accessed successfully');
 }
 
-export { getTransactionsFromDatabase, addTransactionInDatabase };
+export const transactionsRepository = {
+  getAllUserTransactionsFromDatabase,
+  addTransactionInDatabase
+};

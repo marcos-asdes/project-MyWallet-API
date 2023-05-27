@@ -1,10 +1,14 @@
 import { Request, Response } from 'express';
+import { transactionsRepository } from '../repositories/transactionsRepository.js';
+import { Transaction } from '../types/types.js';
+import logHandler from '../events/logHandler.js';
 
 async function getTransactionsController(_req: Request, res: Response): Promise<Response> {
-  // tem q ter um middleware de autenticação
-  // pega as transações no banco de dados baseados no id do usuário
-  return res.sendStatus(200);
-  //return res.send(transactions);
+  const sub = res.locals.subject;
+  const allUserTransactions: Transaction[] =
+    await transactionsRepository.getAllTransactionsFromDatabase(sub);
+  logHandler('Controller', `The user's transactions have been sent`);
+  return res.status(200).send(allUserTransactions);
 }
 
 async function addTransactionsController(req: Request, res: Response): Promise<Response> {
