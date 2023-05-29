@@ -34,7 +34,7 @@ function checkIfPasswordIsValid(password: string, encryptedPassword: string): vo
 
 function generateToken(userId: ObjectId): string {
   const data = {};
-  const subject: string = String(userId.id);
+  const subject: string = userId.toHexString();
   if (!process.env.JWT_SECRET || !process.env.JWT_EXPIRES_IN || !process.env.JWT_ALGORITHM) {
     throw new ErrorLog(500, 'JWT environment variables not found');
   }

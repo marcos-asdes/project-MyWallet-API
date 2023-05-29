@@ -10,10 +10,10 @@ const router = express.Router();
 const api = '/api';
 const doc = api + '/doc';
 
+router.use(routeLog);
+
 router.use(doc, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 router.use(api, authRouter);
 router.use(api, transactionsRouter);
-
-router.use(routeLog);
 
 export default router;

@@ -18,8 +18,9 @@ async function tokenValidationMiddleware(
   if (!process.env.JWT_SECRET) throw new ErrorLog(500, 'JWT environment variable not found');
   try {
     const { sub } = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
+    console.log(sub);
     if (!sub) throw new ErrorLog(401, 'Invalid token');
-    const subObjectId: ObjectId = new ObjectId(sub);
+    const subObjectId: ObjectId = ObjectId.createFromHexString(sub);
     const user_data: UserId | null = await authRepository.findUserIdInDatabase(subObjectId);
     if (!user_data) throw new ErrorLog(404, 'User not found');
     res.locals.user_data = user_data;

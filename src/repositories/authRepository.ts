@@ -38,10 +38,10 @@ async function findUserInDatabase_ThroughUserId(userId: ObjectId): Promise<User 
 
 async function findUserIdInDatabase(id: ObjectId): Promise<UserId | null> {
   if (!db) throw new ErrorLog(500, 'Database connection not established');
-  const userId: UserId | null = await db
-    .collection<User>('users')
-    .findOne({ _id: id, projection: { _id: 1 } });
+  console.log(id);
+  const userId: UserId | null = await db.collection<User>('users').findOne({ _id: id });
   logHandler('Repository', 'Repository accessed successfully');
+  console.log(userId);
   return userId;
 }
 
