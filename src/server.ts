@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import app from './app.js';
 import logHandler from './events/logHandler.js';
+import { connectToMongoDB } from './config.js';
 
 let PORT: number;
 if (process.env.PORT) {
@@ -8,6 +9,8 @@ if (process.env.PORT) {
 } else {
   PORT = 5000;
 }
+
+connectToMongoDB();
 
 app.listen(PORT, () => {
   logHandler('Server', `Server listening on port ${PORT}`);
