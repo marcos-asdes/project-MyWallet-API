@@ -1,22 +1,20 @@
-import { faker } from '@faker-js/faker';
-
 import * as authService from './authService.js';
 import { authRepository } from '../repositories/authRepository.js';
 import { ErrorLog } from '../events/errorHandler.js';
+import { ObjectId } from 'mongodb';
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('checkIfUserIsAlreadyRegistered', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('should throw an error if user already exists', async () => {
-    const email = faker.internet.email();
-    const mockUser = { email: email };
+    const mockUser = { email: 'user@example.com' };
     authRepository.findUserInDatabase_ThroughEmail = jest.fn().mockResolvedValue(mockUser);
 
     expect.assertions(2);
     try {
-      await authService.checkIfUserIsAlreadyRegistered(email);
+      await authService.checkIfUserIsAlreadyRegistered('user@example.com');
     } catch (error) {
       expect(error).toBeInstanceOf(ErrorLog);
       if (error instanceof ErrorLog) {
@@ -57,9 +55,7 @@ describe('encryptPassword', () => {
   it('should throw an error if SALT environment variable is not found', () => {
     delete process.env.SALT;
 
-    expect(() => {
-      authService.encryptPassword('mypassword');
-    }).toThrow(ErrorLog);
+    expect.assertions(2);
     try {
       authService.encryptPassword('mypassword');
     } catch (error) {
@@ -74,13 +70,14 @@ describe('encryptPassword', () => {
 describe('checkIfUserIsRegistered', () => {
   it('should return the sign-in object if user is registered', async () => {
     const email = 'test@example.com';
-    const user = { _id: '123', email: 'test@example.com', password: 'hashedPassword' };
+    const userId = new ObjectId();
+    const user = { _id: userId, email: 'test@example.com', password: 'hashedPassword' };
     authRepository.findUserInDatabase_ThroughEmail = jest.fn().mockResolvedValue(user);
 
     const signInObject = await authService.checkIfUserIsRegistered(email);
 
     expect(signInObject).toBeDefined();
-    expect(signInObject).toEqual({ userId: '123', encryptedPassword: 'hashedPassword' });
+    expect(signInObject).toEqual({ userId: userId, encryptedPassword: 'hashedPassword' });
     expect(authRepository.findUserInDatabase_ThroughEmail).toHaveBeenCalledWith(email);
   });
 
